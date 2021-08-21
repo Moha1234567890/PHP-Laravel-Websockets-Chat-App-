@@ -17,7 +17,13 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('theme/style.css') }}" rel="stylesheet">
+
+
+    @livewireStyles
+
 </head>
 <body>
     <div id="app">
@@ -79,5 +85,7 @@
             @yield('content')
         </main>
     </div>
+    @livewireScripts
+
 </body>
 </html>
