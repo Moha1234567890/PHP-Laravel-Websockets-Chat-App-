@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Conversations\ConversationsController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,4 +21,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/conversate', [ConversationsController::class, 'index'])->name('index');
+Route::get('/conversations', [ConversationsController::class, 'index'])->name('index');
+Route::get('/conversations/{conversation}', [ConversationsController::class, 'show'])->name('show');
