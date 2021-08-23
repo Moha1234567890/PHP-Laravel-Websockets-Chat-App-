@@ -26,6 +26,10 @@ class Conversation extends Model
                     ->latest();
     }
 
+    public function others() {
+        return $this->users()->where('user_id', '!=', auth()->id());
+    }
+
     public function messages() {
         return $this->hasMany(Message::class)
                     ->latest();
