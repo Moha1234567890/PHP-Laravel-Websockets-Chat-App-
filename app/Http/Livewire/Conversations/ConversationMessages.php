@@ -2,17 +2,36 @@
 
 namespace App\Http\Livewire\Conversations;
 use App\Models\Conversation;
+use App\Models\Message;
+use Illuminate\Support\Collection;
 
 use Livewire\Component;
 
 class ConversationMessages extends Component
 {
 
-    public $conversation;
+    public $conversationId;
     public $messages;
 
+
+    public function getListeners() {
+        return [
+            'message.created' => 'prependMessage',
+            "echo-private:conversation.{$this->conversationId},Conversations\\MessageAdded" => 'prependMessageFromBroadcast', 
+        ];
+    }
+
+    public function prependMessage($id) {
+       
+        $this->message->push(Message::find($id));
+    }
+
+    public function prependMessageFromBroadcast($payload) {
+        $this->prependMessage($payload['message']['id']);
+    }
+
     public function mout(Conversation $conversation, Collection $messages) {
-        $this->conversation = $conversation;
+        $this->conversationId = $conversation;
         $this->messages = $messages;
     } 
 

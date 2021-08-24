@@ -30,6 +30,15 @@ class MessageAdded implements ShouldBroadcast
         $this->message = $message;
     }
 
+    public function broadcastWith() {
+
+        return [
+            'message' => [
+                'id' => $this->message->id
+            ]
+        ];
+    }
+
     /**
      * Get the channels the event should broadcast on.
      *
@@ -37,6 +46,6 @@ class MessageAdded implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('conversations.' . $this->message->conversation->id);
     }
 }

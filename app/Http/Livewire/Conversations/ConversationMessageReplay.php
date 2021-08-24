@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Conversations;
 use Livewire\WithFileUploads;
 use App\Models\Conversation;
 use Livewire\Component;
+use App\Events\Conversation\MessageAdded;
 
 class ConversationMessageReplay extends Component
 {
@@ -29,7 +30,7 @@ class ConversationMessageReplay extends Component
     public function replay() {
      
 
-        if(!$this->attachment == '') {
+        if($this->attachment != '') {
             $this->attachment_name = md5($this->attachment . microtime())
             . '.' . $this->attachment->extension();
 
@@ -54,6 +55,12 @@ class ConversationMessageReplay extends Component
                 'read_at' => null
             ]);
         }
+
+        broadcast(new MessageAdded($message))->toOthers;
+
+        $this->emit('message.created', $message->id);
+
+
 
         $this->body = "";
         $this->attachment = "";
