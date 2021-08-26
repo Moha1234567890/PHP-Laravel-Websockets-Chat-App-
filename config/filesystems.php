@@ -45,7 +45,7 @@ return [
         'media' => [
             'driver' => 'local',
             'root' => public_path('assets/attachments'),
-            'url' => env('APP_URL').'/attachments',
+            'url' => env('APP_URL').'/attachment',
             'visibility' => 'public',
         ],
 

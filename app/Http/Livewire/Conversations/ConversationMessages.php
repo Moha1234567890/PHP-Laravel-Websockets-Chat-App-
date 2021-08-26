@@ -12,26 +12,29 @@ class ConversationMessages extends Component
 
     public $conversationId;
     public $messages;
+    //public $message;
 
 
-    public function getListeners() {
+    public function getListeners()
+    {
         return [
             'message.created' => 'prependMessage',
-            "echo-private:conversation.{$this->conversationId},Conversations\\MessageAdded" => 'prependMessageFromBroadcast', 
+            "echo-private:conversations.{$this->conversationId},Conversations\\MessageAdded" => 'prependMessageFromBroadcast',
         ];
     }
 
+
     public function prependMessage($id) {
        
-        $this->message->push(Message::find($id));
+        $this->messages->push(Message::find($id));
     }
 
     public function prependMessageFromBroadcast($payload) {
         $this->prependMessage($payload['message']['id']);
     }
 
-    public function mout(Conversation $conversation, Collection $messages) {
-        $this->conversationId = $conversation;
+    public function mount(Conversation $conversation, Collection $messages) {
+        $this->conversationId = $conversation->id;
         $this->messages = $messages;
     } 
 

@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Conversations;
 use Livewire\WithFileUploads;
 use App\Models\Conversation;
 use Livewire\Component;
-use App\Events\Conversation\MessageAdded;
+use App\Events\Conversations\MessageAdded;
 
 class ConversationMessageReplay extends Component
 {
@@ -28,6 +28,8 @@ class ConversationMessageReplay extends Component
 
 
     public function replay() {
+
+        $this->validate();
      
 
         if($this->attachment != '') {
@@ -56,7 +58,7 @@ class ConversationMessageReplay extends Component
             ]);
         }
 
-        broadcast(new MessageAdded($message))->toOthers;
+        broadcast(new MessageAdded($message))->toOthers();
 
         $this->emit('message.created', $message->id);
 

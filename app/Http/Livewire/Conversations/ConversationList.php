@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Conversations;
+use Illuminate\Support\Collection;
 
 use Livewire\Component;
 
