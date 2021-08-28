@@ -20,6 +20,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/conversations', [ConversationsController::class, 'index'])->name('index');
-Route::get('/conversations/{conversation}', [ConversationsController::class, 'show'])->name('show');
+
+Route::group(['middleware' => ['auth','verified']], function() {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/conversations', [ConversationsController::class, 'index'])->name('index');
+    Route::get('/conversations/{conversation}', [ConversationsController::class, 'show'])->name('show');
+});

@@ -19,6 +19,12 @@ class ConversationsController extends Controller
     public function show(Conversation $conversation, Request $request) {
 
         $conversations = $request->user()->conversations;
+
+        $request->user()->conversations()->updateExistingPivot($conversation, [
+            'read_at' => now()
+        ]);
+
+        
         return view('conversations.show', compact('conversation', 'conversations'));
     }
 
