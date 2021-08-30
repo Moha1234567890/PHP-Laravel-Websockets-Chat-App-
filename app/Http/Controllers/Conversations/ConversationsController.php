@@ -24,8 +24,17 @@ class ConversationsController extends Controller
             'read_at' => now()
         ]);
 
-        
+
         return view('conversations.show', compact('conversation', 'conversations'));
     }
+
+    public function create(Request $request) {
+
+        $conversations = $request->user()->conversations;
+        
+        return view('conversations.create', compact('conversations'));
+    }
+
+
 
 }

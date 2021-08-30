@@ -7,6 +7,7 @@
   
   
     <div class="row rounded-lg overflow-hidden shadow">
+      @include('conversations.partials.header')
       <!-- Users box-->
       <div class="col-5 px-0">
         <div class="bg-white">
@@ -31,11 +32,11 @@
       <div class="col-7 px-0">
         <div class="px-4 py-5 chat-box bg-white">
           <!-- Sender Message-->
-        hello
-  
+          {{-- <livewire:conversations.conversation-create /> --}}
+  index
         </div>
   
-        <!-- Typing area -->
+        {{-- <!-- Typing area -->
         <form action="#" class="bg-light">
           <div class="input-group">
             <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
@@ -43,7 +44,7 @@
               <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
             </div>
           </div>
-        </form>
+        </form> --}}
   
       </div>
     </div>
