@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Conversations;
 use Illuminate\Support\Collection;
+use App\Models\Conversation;
 
 use Livewire\Component;
 
@@ -13,9 +14,15 @@ class ConversationList extends Component
     public function getListeners() {
 
         return [
-            'echo-private:User.' . auth()->id() . ',Conversations\\ConversationUpdated' =>  'updateConversationFromBroadcast'
+            'echo-private:User.' . auth()->id() . ',Conversations\\ConversationCreated' => 'createConversationFromBroadcast',
+            'echo-private:User.' . auth()->id() . ',Conversations\\ConversationUpdated' => 'updateConversationFromBroadcast'
 
         ];
+    }
+
+    public function createConversationFromBroadcast($payload)
+    {
+        return $this->conversations->prepend(Conversation::find($payload['conversation']['id']));
     }
 
 
