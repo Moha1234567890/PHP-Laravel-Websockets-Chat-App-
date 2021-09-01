@@ -33,7 +33,7 @@
         <div class="px-4 py-5 chat-box bg-white">
           <!-- Sender Message-->
           {{-- <livewire:conversations.conversation-create /> --}}
-  index
+          here goes your group
         </div>
   
         {{-- <!-- Typing area -->

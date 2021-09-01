@@ -10,7 +10,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -24,7 +23,7 @@
     {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 
     @livewireStyles
-    {{-- //@yield('style') --}}
+  @yield('style')
 </head>
 <body>
     <div id="app">
@@ -91,7 +90,9 @@
     </div>
 
     @livewireScripts
-        @yield('script')
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    @yield('script')
 
 </body>
 </html>

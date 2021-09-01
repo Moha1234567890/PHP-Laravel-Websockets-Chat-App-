@@ -20,7 +20,7 @@
     </a>
     @empty
     <div class="text-muted">
-        nothing
+        no messages yet
     </div>
 
     @endforelse
