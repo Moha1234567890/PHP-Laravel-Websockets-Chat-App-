@@ -12,28 +12,24 @@ use Illuminate\Queue\SerializesModels;
 use App\Models\User;
 use App\Models\Conversation;
 
-class ConversationUpdated implements ShouldBroadcast
+class UserAdded implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
 
+    public $user;
     public $conversation;
-    public function __construct(Conversation $conversation)
-    {
-        $this->conversation = $conversation;
-    }
 
-    public function broadcastWith() {
-        return [
-                'conversation' => [
-                    'id' => $this->conversation->id
-                ]
-            ];
+
+    public function __construct(Conversation $conversation, User $user)
+    {
+        $this->user = $user;
+        $this->conversation = $conversation;
     }
 
     /**
@@ -41,10 +37,17 @@ class ConversationUpdated implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
+
+
+    public function broadcastWith() {
+        return [
+                'user' => [
+                    'id' => $this->user->id,
+                ]
+            ];
+    }
     public function broadcastOn()
     {
-        return $this->conversation->users->map(function ($user) {
-            return new PrivateChannel('User.' . $user->id);
-        })->toArray();
+        return new PrivateChannel('conversations.' . $this->conversation->id); 
     }
 }

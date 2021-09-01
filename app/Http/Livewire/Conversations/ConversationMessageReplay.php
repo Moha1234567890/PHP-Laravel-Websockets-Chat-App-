@@ -5,6 +5,10 @@ use Livewire\WithFileUploads;
 use App\Models\Conversation;
 use Livewire\Component;
 use App\Events\Conversations\MessageAdded;
+use App\Events\Conversations\ConversationUpdated;
+
+use App\Models\User;
+
 
 class ConversationMessageReplay extends Component
 {
@@ -59,6 +63,7 @@ class ConversationMessageReplay extends Component
         }
 
         broadcast(new MessageAdded($message))->toOthers();
+        broadcast(new ConversationUpdated($message->conversation));
 
         $this->emit('message.created', $message->id);
 

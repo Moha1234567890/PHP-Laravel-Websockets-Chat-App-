@@ -13,7 +13,7 @@
         <div class="bg-white">
           {{-- <livewire:conversations.conversation-users :conversation="$conversation" /> --}}
          
-          <livewire:conversations.conversation-users :conversations="$conversations" :messages="$conversation->messages" />
+          <livewire:conversations.conversation-users :conversation="$conversation" :users="$conversation->users" />
           <div class="messages-box">
             <div class="list-group rounded-0">
 

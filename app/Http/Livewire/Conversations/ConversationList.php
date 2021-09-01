@@ -16,7 +16,6 @@ class ConversationList extends Component
         return [
             'echo-private:User.' . auth()->id() . ',Conversations\\ConversationCreated' => 'createConversationFromBroadcast',
             'echo-private:User.' . auth()->id() . ',Conversations\\ConversationUpdated' => 'updateConversationFromBroadcast'
-
         ];
     }
 
@@ -27,14 +26,17 @@ class ConversationList extends Component
 
 
     public function updateConversationFromBroadcast($payload) {
-        if($conversation = $conversations->find($payload['conversation']['id'])) {
-            $conversation->fresh();
+        if (!$this->conversations->contains($payload['conversation']['id'])){
+            $this->conversations->prepend(Conversation::find($payload['conversation']['id']));
+        } else {
+            $this->conversations->find($payload['conversation']['id'])->fresh();
         }
     }
 
 
-    public function conversations(Collection $conversations) {
-        $this->$conversations = $conversations;
+    public function mount(Collection $conversations)
+    {
+        $this->conversations = $conversations->reverse();
     }
 
 
